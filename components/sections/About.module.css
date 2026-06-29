@@ -1,0 +1,107 @@
+/* About — glass card con bio */
+
+.section {
+  padding: var(--section-gap) var(--container-padding);
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  background: rgba(37, 9, 2, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(173, 40, 49, 0.12);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- Logo/Brand --- */
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--brown-red);
+  padding: 0.3em 0.8em;
+  border: 1px solid rgba(173, 40, 49, 0.3);
+  border-radius: 4px;
+  background: rgba(173, 40, 49, 0.08);
+}
+
+/* --- Label --- */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+/* --- Bio --- */
+.bio {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  white-space: pre-line;
+}
+
+/* --- Quick facts --- */
+.facts {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.factValue {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.factLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(173, 40, 49, 0.2);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+  }
+
+  .facts {
+    gap: 0.75rem;
+  }
+}
