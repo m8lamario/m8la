@@ -1,0 +1,44 @@
+/* PixelTitle — titolo a griglia SVG integrato nel GridCanvas */
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 28vh;
+  overflow: visible;
+}
+
+.pixel {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  /* Il fill è impostato inline come var(--brown-red) */
+}
+
+/* Reveal: i pixel appaiono in cascata */
+.pixel.revealed {
+  animation: reveal-rect 0.15s ease-out both;
+}
+
+@keyframes reveal-rect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .svg {
+    max-height: 20vh;
+  }
+}
+
