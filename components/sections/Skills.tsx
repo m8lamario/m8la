@@ -71,50 +71,78 @@ function SkillItem({
   );
 }
 
-/* ── Sezione Fotografia ── */
+/* ── Sezione Fotografia (Scroll-Driven Continuous) ── */
 function PhotographySection() {
-  const [isPaused, setIsPaused] = useState(false);
-  const rows = chunk(PHOTOS, 3);
-  const duplicatedRows = [...rows, ...rows];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackInnerRef = useRef<HTMLDivElement>(null);
+
+  // Righe: 3 righe da 3 foto + 1 riga con la 10ª + loop delle prime 3 righe
+  const firstSet = chunk(PHOTOS, 3); // [[1,2,3], [4,5,6], [7,8,9], [10]]
+  // Per il loop: ripetiamo le prime 3 righe (9 foto) dopo la 10ª
+  const loopRows = chunk(PHOTOS.slice(0, 9), 3); // [[1,2,3], [4,5,6], [7,8,9]]
+  const allRows = [...firstSet, ...loopRows];
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const inner = trackInnerRef.current;
+    if (!container || !inner) return;
+
+    let rafId: number;
+
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) {
+        inner.style.transform = "translateY(0px)";
+        rafId = requestAnimationFrame(update);
+        return;
+      }
+      // Progresso 0..1 sull'intero scroll del container
+      const raw = -rect.top / scrollable;
+      // Modulo: loop infinito — ogni "unità" corrisponde a firstSet (4 righe)
+      const loopProgress = raw % 1;
+      // Altezza di un ciclo completo (firstSet = 4 righe)
+      // Calcoliamo dinamicamente l'altezza di firstSet
+      const firstSetHeight = inner.scrollHeight / allRows.length * firstSet.length;
+      const offset = -loopProgress * firstSetHeight;
+      inner.style.transform = `translateY(${offset}px)`;
+      rafId = requestAnimationFrame(update);
+    };
+
+    rafId = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(rafId);
+  }, [allRows.length]);
+
+  // Altezza totale: abbastanza per far scorrere almeno 2-3 cicli
+  const outerHeight = "400vh";
 
   return (
-    <div className={styles.photography}>
-      {/* Colonna sinistra — titolo */}
-      <div className={styles.photoTitleCol}>
-        <h2 className={styles.photoTitle}>Fotografia</h2>
-      </div>
+    <div ref={containerRef} className={styles.photography} style={{ height: outerHeight }}>
+      <div className={styles.photographyInner}>
+        {/* Colonna sinistra — titolo */}
+        <div className={styles.photoTitleCol}>
+          <h2 className={styles.photoTitle}>Fotografia</h2>
+        </div>
 
-      {/* Colonna destra — stage 3D */}
-      <div className={styles.photoStageCol}>
-        <div className={styles.photoStage}>
-          <motion.div
-            className={styles.photoTrack}
-            animate={{ y: ["0%", "-50%"] }}
-            transition={{
-              y: {
-                duration: 18,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              },
-            }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            {duplicatedRows.map((row, rowIdx) => (
-              <div key={rowIdx} className={styles.photoRow}>
-                {row.map((src, colIdx) => (
-                  <div
-                    key={colIdx}
-                    className={styles.photoCard}
-                    style={{
-                      backgroundImage: `url(${src})`,
-                    }}
-                  />
+        {/* Colonna destra — stage 3D */}
+        <div className={styles.photoStageCol}>
+          <div className={styles.photoStage}>
+            <div className={styles.photoTrack}>
+              <div ref={trackInnerRef} className={styles.photoTrackInner}>
+                {allRows.map((row, rowIdx) => (
+                  <div key={rowIdx} className={styles.photoRow}>
+                    {row.map((src, colIdx) => (
+                      <div
+                        key={colIdx}
+                        className={styles.photoCard}
+                        style={{ backgroundImage: `url(${src})` }}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

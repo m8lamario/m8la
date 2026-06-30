@@ -25,6 +25,7 @@
   position: relative;
   width: 40%;
   flex-shrink: 0;
+  margin-top: 17rem;
 }
 
 .stickyTitle {
@@ -80,19 +81,28 @@
 }
 
 /* ================================================
-   SEZIONE 2 — Fotografia (3D Perspective Ticker)
+   SEZIONE 2 — Fotografia (Scroll-Driven Continuous)
    ================================================ */
 
+/* Container esterno: alto per dare spazio allo scroll */
 .photography {
+  position: relative;
+  /* height impostata inline */
+}
+
+/* Inner sticky: rimane fissato in viewport mentre si scrolla */
+.photographyInner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
-  min-height: 100vh;
   overflow: hidden;
 }
 
 /* Colonna sinistra — titolo verticale */
 .photoTitleCol {
   position: relative;
-  width: 30%;
+  width: 20%;
   padding: 4rem;
   flex-shrink: 0;
   display: flex;
@@ -112,7 +122,7 @@
 
 /* Colonna destra — stage 3D */
 .photoStageCol {
-  width: 70%;
+  width: 80%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -121,23 +131,28 @@
 
 .photoStage {
   width: 100%;
-  max-width: 700px;
   height: 80vh;
   overflow: hidden;
-  perspective: 900px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  transform: perspective(700px) rotateX(20deg);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   border-radius: 4px;
 }
 
+/* Track esterno: prospettiva 3D fissa */
 .photoTrack {
+  transform: perspective(700px) rotateX(20deg);
+  height: 100%;
+  max-width: 700px;
+  margin-left: 13rem;
+}
+
+/* Track interno: si muove verticalmente con lo scroll */
+.photoTrackInner {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  transform: perspective(900px) rotateY(-18deg);
-  transform-origin: left center;
+  padding: 20vh 0;
   will-change: transform;
 }
 
@@ -161,6 +176,7 @@
 
 .photoCard:hover {
   transform: scale(1.03) rotateY(0deg);
+  transition: transform 0.3s ease-out;
 }
 
 /* ================================================
@@ -219,6 +235,10 @@
   }
 
   .photography {
+    flex-direction: column;
+  }
+
+  .photographyInner {
     flex-direction: column;
   }
 
