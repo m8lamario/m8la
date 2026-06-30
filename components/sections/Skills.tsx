@@ -18,16 +18,16 @@ const WEB_DEV_SKILLS = [
 
 /* ── Dati foto ── */
 const PHOTOS = [
-  "/images/photography/1.jpg",
-  "/images/photography/2.jpg",
-  "/images/photography/3.jpg",
-  "/images/photography/4.jpg",
-  "/images/photography/5.jpg",
-  "/images/photography/6.jpg",
-  "/images/photography/7.jpg",
-  "/images/photography/8.jpg",
-  "/images/photography/9.jpg",
-  "/images/photography/10.jpg",
+  "/images/photography/1.webp",
+  "/images/photography/2.webp",
+  "/images/photography/3.webp",
+  "/images/photography/4.webp",
+  "/images/photography/5.webp",
+  "/images/photography/6.webp",
+  "/images/photography/7.webp",
+  "/images/photography/8.webp",
+  "/images/photography/9.webp",
+  "/images/photography/10.webp",
 ];
 
 /* Raggruppa in righe da 3 */

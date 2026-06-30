@@ -31,7 +31,7 @@
   position: sticky;
   top: 50%;
   transform: translateY(-50%);
-  padding: 2rem;
+  padding: 4rem;
 }
 
 .stickyTitle h2 {
@@ -92,11 +92,12 @@
 /* Colonna sinistra — titolo verticale */
 .photoTitleCol {
   position: relative;
-  width: 40%;
+  width: 30%;
+  padding: 4rem;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .photoTitle {
@@ -111,11 +112,11 @@
 
 /* Colonna destra — stage 3D */
 .photoStageCol {
-  width: 60%;
+  width: 70%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .photoStage {
@@ -224,7 +225,7 @@
   .photoTitleCol {
     width: 100%;
     min-height: auto;
-    padding: 3rem 1.5rem 1.5rem;
+    padding: 4rem 1.5rem 1.5rem;
   }
 
   .photoTitle {
