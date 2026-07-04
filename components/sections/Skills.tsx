@@ -40,23 +40,31 @@ function chunk<T>(arr: T[], size: number): T[][] {
   return result;
 }
 
-/* ── PixelLabel — titolo a quadratini SVG, ruotato di 90° ── */
+/* ── PixelLabel — titolo a quadratini SVG, testo in verticale ── */
 function PixelLabel({ text, style }: { text: string; style?: React.CSSProperties }) {
   const layout = buildLayout(text, 0.55, 1);
+  const PAD_COLS = 60; // viewBox fisso: entrambi i titoli hanno stessa scala
+  // Ruota ogni pixel: (x, y) → (y, PAD_COLS - x - 0.55)
+  const rotatedRects = layout.rects.map((r) => ({
+    x: r.y,
+    y: PAD_COLS - r.x - 0.55,
+    w: r.h,
+    h: r.w,
+  }));
   return (
     <svg
-      viewBox={`0 0 ${layout.totalCols} ${layout.totalRows}`}
+      viewBox={`0 0 ${layout.totalRows} ${PAD_COLS}`}
       preserveAspectRatio="xMidYMid meet"
       aria-label={text}
       style={{
         display: "block",
         height: "60vh",
-        transform: "rotate(90deg)",
-        transformOrigin: "center center",
+        width: "auto",
+        flexShrink: 0,
         ...style,
       }}
     >
-      {layout.rects.map((r, i) => (
+      {rotatedRects.map((r, i) => (
         <rect
           key={i}
           x={r.x}
