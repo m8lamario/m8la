@@ -17,7 +17,7 @@
   --bg-secondary:    #0f0f0f;
   --text-primary:    #f5f0ed;
   --text-secondary:  #b8a9a0;
-  --text-muted:      #7a6e66;
+  --text-muted:      #8a7e76;
   --accent:          var(--brown-red);
   --accent-hover:    #c9353d;
   --glass-bg:        rgba(37, 9, 2, 0.25);
@@ -142,4 +142,11 @@ ul, ol {
 ::selection {
   background: var(--brown-red);
   color: var(--text-primary);
+}
+
+/* --- Focus visible (accessibility) --- */
+:focus-visible {
+  outline: 2px solid var(--brown-red);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

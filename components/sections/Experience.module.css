@@ -376,3 +376,30 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 375px) {
+  .contentCol {
+    padding: 3rem 1rem 3rem;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .role {
+    font-size: 1.05rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+
+  .timelineRows {
+    padding-left: 24px;
+    gap: 1.5rem;
+  }
+
+  .timelineRow {
+    gap: 0.75rem;
+  }
+}
