@@ -251,6 +251,10 @@ export default function Projects() {
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
+        <div className={styles.swipeCue} aria-hidden="true">
+          <span className={styles.cueTrack} />
+          <span className={styles.cueArrow} />
+        </div>
 
         {/* Toggle "altri progetti" */}
         {others.length > 0 && (

@@ -218,3 +218,35 @@
     height: 200vh;
   }
 }
+
+@media (max-width: 767px) {
+  .photoStage {
+    height: min(74svh, 38rem);
+    border: 1px solid rgba(173, 40, 49, 0.16);
+    contain: paint;
+  }
+
+  .photoTrack {
+    width: 100%;
+    transform: none;
+  }
+
+  .photoTrackInner {
+    gap: 0.75rem;
+    padding: 4vh 0;
+  }
+
+  .photoRow {
+    height: clamp(220px, 30svh, 280px);
+    gap: 0.75rem;
+  }
+
+  .photoCard {
+    border-radius: 10px;
+    border: 1px solid rgba(173, 40, 49, 0.12);
+  }
+
+  .photoCard:hover {
+    transform: none;
+  }
+}

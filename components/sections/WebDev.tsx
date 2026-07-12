@@ -64,6 +64,7 @@ export default function WebDev() {
   useEffect(() => {
     const container = scrollColRef.current;
     if (!container) return;
+    if (window.matchMedia("(max-width: 767px)").matches) return;
     window.addEventListener("scroll", updateActive, { passive: true });
     updateActive();
     return () => window.removeEventListener("scroll", updateActive);
